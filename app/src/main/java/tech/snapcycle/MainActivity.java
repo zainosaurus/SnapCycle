@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        visionTest();
+        //visionTest();
     }
 
     public void visionTest() {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         null);
 
                 visionBuilder.setVisionRequestInitializer(
-                        new VisionRequestInitializer("AIzaSyDTvLj9OYUWA23v_TSQroUbisypXaJIfXU"));
+                        new VisionRequestInitializer(""));
 
                 Vision vision = visionBuilder.build();
 
