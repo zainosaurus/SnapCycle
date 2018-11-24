@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         null);
 
                 visionBuilder.setVisionRequestInitializer(
-                        new VisionRequestInitializer(""));
+                        new VisionRequestInitializer("AIzaSyDTvLj9OYUWA23v_TSQroUbisypXaJIfXU"));
 
                 Vision vision = visionBuilder.build();
 

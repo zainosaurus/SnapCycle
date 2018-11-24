@@ -1,11 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="">
-        <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/skyBlue</item>
+    <style name="AppTheme" parent="android:Theme.Holo">
+        <!-- Customize your theme here. -->\
         <item name="colorPrimary">@color/darkGrayColor</item>
-        <item name="colorPrimaryDark">@color/darkColor</item>
+        <item name="colorPrimaryDark">@color/skyBlue</item>
         <item name="colorAccent">@color/darkColor</item>
     </style>
 
