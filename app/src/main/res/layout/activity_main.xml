@@ -13,7 +13,7 @@
         android:layout_height="53dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Welcome to SnapCycle"
-        android:textColor="@color/vibrantGreen"
+        android:textColor="@color/darkGreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -2,6 +2,7 @@
 <resources>
     <color name="skyBlue">#6290a9</color>
     <color name="vibrantGreen">#68e157</color>
+    <color name="darkGreen">#195311</color>
     <color name="recycleBlue">#080da3</color>
     <color name="darkColor">#000000</color>
     <color name="darkGrayColor">#414141</color>
