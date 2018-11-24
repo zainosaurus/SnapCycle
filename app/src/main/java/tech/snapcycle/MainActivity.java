@@ -32,16 +32,21 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.barcode_button);
+        createListener(BarcodeActivity.class, R.id.barcode_button);
+        createListener(ImageActivity.class, R.id.image_button);
+        visionTest();
+    }
+
+    private void createListener(final Class<?> activity, int id) {
+        Button barcode_button = findViewById(id);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BarcodeActivity.class);
+                Intent intent = new Intent(MainActivity.this, activity);
                 startActivity(intent);
             }
         };
-        button.setOnClickListener(listener);
-        visionTest();
+        barcode_button.setOnClickListener(listener);
     }
 
     public void visionTest() {

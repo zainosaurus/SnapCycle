@@ -37,7 +37,7 @@
             tools:ignore="UselessParent">
 
             <Button
-                android:id="@+id/barcode_camera_button"
+                android:id="@+id/image_camera_button"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
