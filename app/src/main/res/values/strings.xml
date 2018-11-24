@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SnapCycle</string>
+    <string name="titleString">Welcome to SnapCycle</string>
 </resources>
