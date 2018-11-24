@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">SnapCycle</string>
     <string name="titleString">Welcome to SnapCycle</string>
+
+    <string name="title_activity_barcode">Barcode Scanner</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_image">Image Recognition Scanner</string>
 </resources>
