@@ -102,8 +102,13 @@ public class MainActivity extends AppCompatActivity {
                         "This photo has " + numberOfFaces + " faces" + likelihoods;
                 System.out.println(message);
                 // Display toast on UI thread
-                Toast.makeText(getApplicationContext(),
-                        message, Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                message, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
