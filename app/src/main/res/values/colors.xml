@@ -6,9 +6,12 @@
     <color name="recycleBlue">#080da3</color>
     <color name="darkColor">#000000</color>
     <color name="darkGrayColor">#414141</color>
+    <color name="lightGray">#585858</color>
     <color name="lightBlue">#b6f2fd</color>
 
     <color name="backgroundColor">@color/darkColor</color>
     <color name="titleTextColor">@color/lightBlue</color>
     <color name="titleBackgroundColor">@color/darkGrayColor</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
