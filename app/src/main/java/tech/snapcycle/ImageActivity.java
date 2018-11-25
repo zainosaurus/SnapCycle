@@ -3,6 +3,7 @@ package tech.snapcycle;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.AsyncTask;
@@ -37,12 +39,25 @@ public class ImageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_activity);
+        createListener(ImageActivity.this, MainActivity.class, R.id.image_return_button);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         openCameraForPicture();
+    }
+
+    private void createListener(final Context context, final Class<?> activity, int id) {
+        Button barcode_button = findViewById(id);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, activity);
+                startActivity(intent);
+            }
+        };
+        barcode_button.setOnClickListener(listener);
     }
 
     private File createImageFile() throws IOException {

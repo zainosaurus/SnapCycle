@@ -3,7 +3,9 @@
     package="tech.snapcycle">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <uses-feature
         android:name="android.hardware.camera2"
@@ -24,15 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BarcodeActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_barcode"
-            android:theme="@style/FullscreenTheme" />
-        <activity
             android:name=".ImageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_image"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
@@ -40,8 +38,10 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/files_paths"></meta-data>
+                android:resource="@xml/files_paths" />
         </provider>
+
+        <activity android:name=".InfoActivity"></activity>
     </application>
 
 </manifest>
