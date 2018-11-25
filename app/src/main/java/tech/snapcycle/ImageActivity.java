@@ -14,10 +14,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -174,6 +176,8 @@ public class ImageActivity extends Activity {
             ImageView imageView = findViewById(R.id.image_recognition_picture_view);
             imageView.setImageURI(Uri.fromFile(new File(mCurrentPhotoPath)));
             // Process image here
+            List<String> results = new ImageDetection().detectWebResults(mCurrentPhotoPath);
+//            visionTest(mCurrentPhotoPath);
         }
     }
 
@@ -219,4 +223,5 @@ public class ImageActivity extends Activity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
 }

@@ -28,8 +28,6 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -126,7 +124,7 @@ public class MainActivity extends Activity {
 //                final String message =
 //                        "This photo has " + numberOfFaces + " faces" + likelihoods;
 //                System.out.println(message);
-                // Display toast on UI thread
+//                 Display toast on UI thread
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -136,7 +134,7 @@ public class MainActivity extends Activity {
 //                });
 //            }
 //        });
-
-
+//
+//
 //    }
 }

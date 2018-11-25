@@ -1,5 +1,7 @@
 package tech.snapcycle;
 
+import android.os.AsyncTask;
+
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.vision.v1.Vision;
@@ -15,95 +17,106 @@ import com.google.api.services.vision.v1.model.WebLabel;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ImageDetection {
+    class ContainerClass {
+        public List<String> labelList;
+        public ContainerClass() {
+            labelList = new ArrayList<String>();
+        }
+    }
 
     public ImageDetection() {}
 
-    public List<String> detectWebResults(String filePath) {
-        List<String> labelList = new ArrayList<String>();
-        Vision.Builder visionBuilder = new Vision.Builder(
-                new NetHttpTransport(),
-                new AndroidJsonFactory(),
-                null);
+    public List<String> detectWebResults(final String filePath) {
+        final ContainerClass container = new ContainerClass();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Vision.Builder visionBuilder = new Vision.Builder(
+                        new NetHttpTransport(),
+                        new AndroidJsonFactory(),
+                        null);
 
-        visionBuilder.setVisionRequestInitializer(
-                new VisionRequestInitializer("AIzaSyDTvLj9OYUWA23v_TSQroUbisypXaJIfXU"));
+                visionBuilder.setVisionRequestInitializer(
+                        new VisionRequestInitializer("AIzaSyDTvLj9OYUWA23v_TSQroUbisypXaJIfXU"));
 
-        Vision vision = visionBuilder.build();
+                Vision vision = visionBuilder.build();
 
-        // Convert photo to byte array
-        InputStream inputStream = null;
-        try {
-            inputStream = Files.newInputStream(Paths.get(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        byte[] photoData = new byte[0];
-        try {
-            photoData = IOUtils.toByteArray(inputStream);
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                // Convert photo to byte array
+                InputStream inputStream = null;
+                try {
+                    //            inputStream = Files.newInputStream(Paths.get(filePath));
+                    inputStream = new FileInputStream(filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                byte[] photoData = new byte[0];
+                try {
+                    photoData = IOUtils.toByteArray(inputStream);
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-        // More code here
-        Image inputImage = new Image();
-        inputImage.encodeContent(photoData);
+                // More code here
+                Image inputImage = new Image();
+                inputImage.encodeContent(photoData);
 
-        Feature desiredFeature = new Feature();
-        desiredFeature.setType("WEB_DETECTION");
+                Feature desiredFeature = new Feature();
+                desiredFeature.setType("WEB_DETECTION");
 
-        AnnotateImageRequest request = new AnnotateImageRequest();
-        request.setImage(inputImage);
-        request.setFeatures(Arrays.asList(desiredFeature));
+                AnnotateImageRequest request = new AnnotateImageRequest();
+                request.setImage(inputImage);
+                request.setFeatures(Arrays.asList(desiredFeature));
 
-        BatchAnnotateImagesRequest batchRequest = new BatchAnnotateImagesRequest();
+                BatchAnnotateImagesRequest batchRequest = new BatchAnnotateImagesRequest();
 
-        batchRequest.setRequests(Arrays.asList(request));
+                batchRequest.setRequests(Arrays.asList(request));
 
-        BatchAnnotateImagesResponse batchResponse = null;
-        try {
-            batchResponse = vision.images().annotate(batchRequest).execute();
-        } catch (IOException e) {
-            System.out.println("------ ERROR GETTING ANNOTATIONS ----");
-            e.printStackTrace();
-        }
+                BatchAnnotateImagesResponse batchResponse = null;
+                try {
+                    batchResponse = vision.images().annotate(batchRequest).execute();
+                } catch (IOException e) {
+                    System.out.println("------ ERROR GETTING ANNOTATIONS ----");
+                    e.printStackTrace();
+                }
 
-        WebDetection webResponse = batchResponse.getResponses().get(0).getWebDetection();
-        List<WebLabel> labels = webResponse.getBestGuessLabels();
-        List<WebEntity> entities = webResponse.getWebEntities();
+                WebDetection webResponse = batchResponse.getResponses().get(0).getWebDetection();
+                List<WebLabel> labels = webResponse.getBestGuessLabels();
+                List<WebEntity> entities = webResponse.getWebEntities();
 
-        // Count labels
-        int numberOfLabels = labels.size();
-        int numEntities = entities.size();
+                // Count labels
+                int numberOfLabels = labels.size();
+                int numEntities = entities.size();
 
-        //Get label strings
-        String labelStrings = "";
-        for(int i=0; i<numberOfLabels; i++) {
-            labelStrings += "\n" + labels.get(i).getLabel();
-            labelList.add(labels.get(i).getLabel());
-        }
+                //Get label strings
+                String labelStrings = "";
+                for (int i = 0; i < numberOfLabels; i++) {
+                    labelStrings += "\n" + labels.get(i).getLabel();
+                    container.labelList.add(labels.get(i).getLabel());
+                }
 
-        // Get entity descriptions
-        String entityStrings = "";
-        for(int i=0; i<numEntities; i++) {
-            entityStrings += "\n" + entities.get(i).getDescription();
-        }
+                // Get entity descriptions
+                String entityStrings = "";
+                for (int i = 0; i < numEntities; i++) {
+                    entityStrings += "\n" + entities.get(i).getDescription();
+                    container.labelList.add(entities.get(i).getDescription());
+                }
 
-        // Concatenate everything
-        final String message = "This photo has " + numberOfLabels + " labels and " + numEntities + " entities:";
-        System.out.println(message);
-        System.out.println(labelStrings);
-        System.out.println(entityStrings);
-
-        return labelList;
+                // Concatenate everything
+                final String message = "This photo has " + numberOfLabels + " labels and " + numEntities + " entities:";
+                System.out.println(message);
+                System.out.println(labelStrings);
+                System.out.println(entityStrings);
+            }
+        });
+        return container.labelList;
     }
 }
