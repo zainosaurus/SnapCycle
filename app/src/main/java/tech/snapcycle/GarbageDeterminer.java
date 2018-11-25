@@ -9,7 +9,7 @@ public class GarbageDeterminer {
     public static boolean checkGarbage(List<String> possibleItems) {
         boolean trash = true;
         for (int i = 0; i < possibleItems.size(); i++) {
-            for (int j = 0; j < RECYCLABLES.length; i++) {
+            for (int j = 0; j < RECYCLABLES.length; j++) {
                 if (possibleItems.get(i).toUpperCase().equals(RECYCLABLES[j].toUpperCase())) {
                     trash = false;
                     break;

@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.os.AsyncTask;
 
 
 import java.io.File;
@@ -86,9 +87,23 @@ public class ImageActivity extends Activity {
             ImageView imageView = findViewById(R.id.image_recognition_picture_view);
             imageView.setImageURI(Uri.fromFile(new File(mCurrentPhotoPath)));
             // Process image here
-            List<String> results = new ImageDetection().detectWebResults(mCurrentPhotoPath);
+            new JustDoIt().execute(mCurrentPhotoPath);
+        }
+    }
+
+    class JustDoIt extends AsyncTask<String, Void, List<String>> {
+
+        @Override
+        protected List<String> doInBackground(String... filename) {
+            List<String> results = new ImageDetection().detectLabels(mCurrentPhotoPath);
+            return results;
+        }
+
+        protected void onPostExecute (List<String> results) {
             TextView imageIdentifierTextView = findViewById(R.id.image_identifier_text);
-            if (results.size() >= 3) {
+            TextView recyclableView = findViewById(R.id.recyclable_field);
+
+            try {
                 TextView topTextView = findViewById(R.id.image_top_info);
                 TextView middleTextView = findViewById(R.id.image_middle_info);
                 TextView bottomTextView = findViewById(R.id.image_bottom_info);
@@ -96,8 +111,19 @@ public class ImageActivity extends Activity {
                 topTextView.setText(results.get(0));
                 middleTextView.setText(results.get(1));
                 bottomTextView.setText(results.get(2));
-            } else {
+            } catch (Exception e) {
+                // do nothing
+            }
+
+            if (results.size() == 0) {
                 imageIdentifierTextView.setText(NO_RESULTS_FOUND);
+            }
+
+            // Recycling status
+            if (GarbageDeterminer.checkGarbage(results)) {
+                recyclableView.setText("This is trash");
+            } else {
+                recyclableView.setText("This can be recycled");
             }
         }
     }
