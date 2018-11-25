@@ -11,7 +11,7 @@
          TextureView, etc. -->
     <ImageView
         android:contentDescription="@string/image_activity_content_description"
-        android:id="@+id/fullscreen_content"
+        android:id="@+id/image_recognition_picture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
