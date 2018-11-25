@@ -123,9 +123,19 @@ public class ImageActivity extends Activity {
                 TextView middleTextView = findViewById(R.id.image_middle_info);
                 TextView bottomTextView = findViewById(R.id.image_bottom_info);
                 imageIdentifierTextView.setText(RESULTS_FOUND);
-                topTextView.setText(results.get(0));
-                middleTextView.setText(results.get(1));
-                bottomTextView.setText(results.get(2));
+                int index = 0;
+                if (results.get(index++) == "product") {
+                    index++;
+                }
+                topTextView.setText(results.get(index++));
+                if (results.get(index) == "product") {
+                    index++;
+                }
+                middleTextView.setText(results.get(index++));
+                if (results.get(index) == "product") {
+                    index++;
+                }
+                bottomTextView.setText(results.get(index));
             } catch (Exception e) {
                 // do nothing
             }
