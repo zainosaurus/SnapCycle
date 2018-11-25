@@ -1,9 +1,11 @@
 package tech.snapcycle;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -37,12 +39,26 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageDetection imgdetect = new ImageDetection();
-        imgdetect.detectWebResults("~/dev/SnapCycle/app/main/res/raw/timscup.jpg");
+        createListener(BarcodeActivity.class, R.id.barcode_button);
+        createListener(ImageActivity.class, R.id.image_button);
+        createListener(null, R.id.app_info_button);
 //        visionTest();
     }
 
+    private void createListener(final Class<?> activity, int id) {
+        Button barcode_button = findViewById(id);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, activity);
+                startActivity(intent);
+            }
+        };
+        barcode_button.setOnClickListener(listener);
+    }
+
 //    public void visionTest() {
+//
 //        // Create new thread
 //        AsyncTask.execute(new Runnable() {
 //            @Override
@@ -58,7 +74,8 @@ public class MainActivity extends Activity {
 //                Vision vision = visionBuilder.build();
 //
 //                // Convert photo to byte array
-//                InputStream inputStream = Files.newInputStream(Paths.get(filePath));
+//                InputStream inputStream =
+//                        getResources().openRawResource(R.raw.apollo9_prime_crew);
 //                byte[] photoData = new byte[0];
 //                try {
 //                    photoData = IOUtils.toByteArray(inputStream);
@@ -72,49 +89,43 @@ public class MainActivity extends Activity {
 //                inputImage.encodeContent(photoData);
 //
 //                Feature desiredFeature = new Feature();
-//                desiredFeature.setType("WEB_DETECTION");
+//                desiredFeature.setType("FACE_DETECTION");
 //
 //                AnnotateImageRequest request = new AnnotateImageRequest();
 //                request.setImage(inputImage);
 //                request.setFeatures(Arrays.asList(desiredFeature));
 //
-//                BatchAnnotateImagesRequest batchRequest = new BatchAnnotateImagesRequest();
+//                BatchAnnotateImagesRequest batchRequest =
+//                        new BatchAnnotateImagesRequest();
 //
 //                batchRequest.setRequests(Arrays.asList(request));
 //
-//                BatchAnnotateImagesResponse batchResponse = null;
+//                BatchAnnotateImagesResponse batchResponse =
+//                        null;
 //                try {
 //                    batchResponse = vision.images().annotate(batchRequest).execute();
 //                } catch (IOException e) {
-//                    System.out.println("------ ERROR GETTING ANNOTATIONS ----");
 //                    e.printStackTrace();
 //                }
 //
-//                WebDetection webResponse = batchResponse.getResponses().get(0).getWebDetection();
-//                List<WebLabel> labels = webResponse.getBestGuessLabels();
-//                List<WebEntity> entities = webResponse.getWebEntities();
+//                List<FaceAnnotation> faces = batchResponse.getResponses()
+//                        .get(0).getFaceAnnotations();
 //
-//                // Count labels
-//                int numberOfLabels = labels.size();
-//                int numEntities = entities.size();
+//                // Count faces
+//                int numberOfFaces = faces.size();
 //
-//                //Get label strings
-//                String labelStrings = "";
-//                for(int i=0; i<numberOfLabels; i++) {
-//                    labelStrings += "\n" + labels.get(i).getLabel();
-//                }
-//
-//                // Get entity descriptions
-//                String entityStrings = "";
-//                for(int i=0; i<numEntities; i++) {
-//                    entityStrings += "\n" + entities.get(i).getDescription();
+//                // Get joy likelihood for each face
+//                String likelihoods = "";
+//                for(int i=0; i<numberOfFaces; i++) {
+//                    likelihoods += "\n It is " +
+//                            faces.get(i).getJoyLikelihood() +
+//                            " that face " + i + " is happy";
 //                }
 //
 //                // Concatenate everything
-//                final String message = "This photo has " + numberOfLabels + " labels and " + numEntities + " entities:";
+//                final String message =
+//                        "This photo has " + numberOfFaces + " faces" + likelihoods;
 //                System.out.println(message);
-//                System.out.println(labelStrings);
-//                System.out.println(entityStrings);
                 // Display toast on UI thread
 //                runOnUiThread(new Runnable() {
 //                    @Override

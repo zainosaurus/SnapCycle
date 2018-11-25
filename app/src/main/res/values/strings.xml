@@ -1,4 +1,18 @@
 <resources>
+    <!-- General Strings -->
+    <string name="return_button">Return</string>
+
+    <!-- Main activity strings -->
     <string name="app_name">SnapCycle</string>
-    <string name="titleString">Welcome to SnapCycle</string>
+    <string name="welcome">Welcome to SnapCycle</string>
+    <string name="barcode_start_button">Barcode Scanner</string>
+    <string name="image_start_button">Image Scanner</string>
+    <string name="app_info_button">Info</string>
+
+    <!-- Barcode activity strings -->
+    <string name="title_activity_barcode">Barcode Scanner</string>
+
+    <!-- Image activity strings -->
+    <string name="title_activity_image">Image Recognition Scanner</string>
+    <string name="image_activity_content_description">Image of the photo being used</string>
 </resources>
