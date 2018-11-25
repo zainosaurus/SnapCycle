@@ -7,12 +7,29 @@
     <string name="welcome">Welcome to SnapCycle</string>
     <string name="barcode_start_button">Barcode Scanner</string>
     <string name="image_start_button">Image Scanner</string>
-    <string name="app_info_button">Info</string>
-
-    <!-- Barcode activity strings -->
-    <string name="title_activity_barcode">Barcode Scanner</string>
+    <string name="app_info_button">About</string>
+    <string name="recycling_tips">Recycling Tips</string>
+    <string name="recycling_tip_one">Wash out cans and other beverage containers before recycling</string>
+    <string name="recycling_tip_two">Different cities have different rules on what can be recycled</string>
+    <string name="recycling_tip_three">Some none recyclable items, like food, make great compost for your yard</string>
 
     <!-- Image activity strings -->
     <string name="title_activity_image">Image Recognition Scanner</string>
     <string name="image_activity_content_description">Image of the photo being used</string>
+
+    <!-- Info activity strings -->
+    <string name="info_header">About SnapCycle</string>
+    <string name="about_snapcycle">
+        SnapCycle was created with the inspiration to help with the suffering global climate. Realizing
+        that many do not know what can and can\'t be recycled, along with the requirements to recycle certain items,
+        such as washing cans, gave us the idea to create an application to assist with that - thus SnapCycle was born.
+        SnapCycle allows users to simply take a picture of any item, and we will tell you what we think the item is and
+        if the item can be recycled or not.
+    </string>
+    <string name="snapcycle_members_header">Our Team</string>
+    <string name="snapcycle_members_list">
+        Justin Cook - Mechatronics Engineering at McMaster University\n\n
+        Zain Tahlilkar - Mechatronics Engineering at McMaster University\n\n
+        Geedhanjali Vivekanadan - Biochemical Sciences at Western University
+    </string>
 </resources>

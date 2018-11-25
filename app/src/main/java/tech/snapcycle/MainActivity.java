@@ -1,6 +1,7 @@
 package tech.snapcycle;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,18 +38,16 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createListener(BarcodeActivity.class, R.id.barcode_button);
-        createListener(ImageActivity.class, R.id.image_button);
-        createListener(null, R.id.app_info_button);
-//        visionTest();
+        createListener(MainActivity.this, ImageActivity.class, R.id.image_button);
+        createListener(MainActivity.this, InfoActivity.class, R.id.app_info_button);
     }
 
-    private void createListener(final Class<?> activity, int id) {
+    private void createListener(final Context context, final Class<?> activity, int id) {
         Button barcode_button = findViewById(id);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, activity);
+                Intent intent = new Intent(context, activity);
                 startActivity(intent);
             }
         };
