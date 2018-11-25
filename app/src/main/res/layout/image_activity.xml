@@ -3,19 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@color/backgroundColor"
     tools:context=".ImageActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <TextView
+    <ImageView
+        android:contentDescription="@string/image_activity_content_description"
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />
 
@@ -37,12 +37,12 @@
             tools:ignore="UselessParent">
 
             <Button
-                android:id="@+id/barcode_camera_button"
+                android:id="@+id/image_return_button"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dummy_button" />
+                android:text="@string/return_button" />
 
         </LinearLayout>
     </FrameLayout>

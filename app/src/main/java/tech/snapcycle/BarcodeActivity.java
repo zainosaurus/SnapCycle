@@ -3,8 +3,10 @@ package tech.snapcycle;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -13,6 +15,7 @@ import android.view.View;
  * status bar and navigation/system bar) with user interaction.
  */
 public class BarcodeActivity extends Activity {
+    private static final int IMAGE_CAPTURE_REQUEST_NUMBER = 1;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -105,7 +108,7 @@ public class BarcodeActivity extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.barcode_camera_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
@@ -116,6 +119,14 @@ public class BarcodeActivity extends Activity {
         // created, to briefly hint to the user that UI controls
         // are available.
         delayedHide(100);
+        openCameraForPicture();
+    }
+
+    private void openCameraForPicture() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, IMAGE_CAPTURE_REQUEST_NUMBER);
+        }
     }
 
     private void toggle() {
