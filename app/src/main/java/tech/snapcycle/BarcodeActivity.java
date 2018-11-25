@@ -108,7 +108,7 @@ public class BarcodeActivity extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.barcode_camera_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.barcode_return_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
