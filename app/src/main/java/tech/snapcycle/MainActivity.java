@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         createListener(BarcodeActivity.class, R.id.barcode_button);
         createListener(ImageActivity.class, R.id.image_button);
+        createListener(null, R.id.app_info_button);
         visionTest();
     }
 
