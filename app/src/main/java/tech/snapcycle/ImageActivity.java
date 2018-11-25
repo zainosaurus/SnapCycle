@@ -105,7 +105,7 @@ public class ImageActivity extends Activity {
         setContentView(R.layout.image_activity);
 
         mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
+        mControlsView = findViewById(R.id.image_layout_button);
         mContentView = findViewById(R.id.image_recognition_picture_view);
 
 
